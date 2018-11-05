@@ -3,4 +3,4 @@ Desktop PC gadget to monitor: date, time, weather, RSS feeds, temperature sensor
 
 <img src="https://preview.ibb.co/cbgDtL/screenshot2.png" width="900">
 
-<img src="https://image.ibb.co/gbZNnf/screenshot.png">
+<img src="https://image.ibb.co/gbZNnf/screenshot.png" align="right">
