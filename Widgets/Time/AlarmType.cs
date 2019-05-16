@@ -1,4 +1,4 @@
 ﻿namespace Gadget.Widgets.Time
 {
-    public enum AlarmType { Alarm = 0, Shutdown = 1, Restart = 2, Hibernate = 3 }
+    public enum AlarmType { Shutdown = 0, Restart = 1, Hibernate = 2, Alarm = 3 }
 }

@@ -1,4 +1,4 @@
 ﻿namespace Gadget.Widgets.Time
 {
-    public enum TimeType { OnThatTime = 0, AfterThatTime = 1 }
+    public enum TimeType { AfterThatTime = 0, OnThatTime = 1 }
 }
