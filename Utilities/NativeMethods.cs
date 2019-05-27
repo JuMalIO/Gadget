@@ -132,7 +132,8 @@ namespace Gadget.Utilities
 		public const int WM_WINDOWPOSCHANGING = 0x0046;
 		public const int WM_COMMAND = 0x0111;
 
-		public const int WM_NCMOUSELEAVE = 0x02A2;
+        public const int WM_KILLFOCUS = 0x8;
+        public const int WM_NCMOUSELEAVE = 0x02A2;
 		public const int WM_NCMOUSEMOVE = 0xA0;
 
 		public const int TPM_RIGHTBUTTON = 0x0002;

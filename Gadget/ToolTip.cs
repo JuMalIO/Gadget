@@ -208,7 +208,8 @@ namespace Gadget.Gadget
 						message.Result = (IntPtr)HitResult.Caption;
 					}
 					break;
-				case NativeMethods.WM_NCMOUSELEAVE:
+                case NativeMethods.WM_KILLFOCUS:
+                case NativeMethods.WM_NCMOUSELEAVE:
 					{
 						Hide();
 						message.Result = IntPtr.Zero;

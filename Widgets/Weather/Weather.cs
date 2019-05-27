@@ -125,21 +125,19 @@ namespace Gadget.Widgets.Weather
 				var title = new List<string>();
 				var text = new List<string>();
 				var image = new List<Image>();
-				title.Add(_weatherData.DayForcast[1].Item1);
-				image.Add(GetImage(_weatherData.DayForcast[1].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime));
-				text.Add(_weatherData.DayForcast[1].Item3 + " " + _weatherData.DayForcast[1].Item4 + CELCIUS);
-				if (_weatherData.DayForcast.Count > 2)
-				{
-					title.Add(_weatherData.DayForcast[2].Item1);
-					image.Add(GetImage(_weatherData.DayForcast[2].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime));
-					text.Add(_weatherData.DayForcast[2].Item3 + " " + _weatherData.DayForcast[2].Item4 + CELCIUS);
-				}
-				if (_weatherData.DayForcast.Count > 3)
-				{
-					title.Add(_weatherData.DayForcast[3].Item1);
-					image.Add(GetImage(_weatherData.DayForcast[2].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime));
-					text.Add(_weatherData.DayForcast[3].Item3 + " " + _weatherData.DayForcast[3].Item4 + CELCIUS);
-				}
+
+                for (var i = 1; i <= 3; i++)
+                {
+                    if (_weatherData.DayForcast.Count <= i)
+                    {
+                        break;
+                    }
+
+                    title.Add(_weatherData.DayForcast[i].Item1);
+                    image.Add(GetImage(_weatherData.DayForcast[i].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime));
+                    text.Add(_weatherData.DayForcast[i].Item3 + " " + _weatherData.DayForcast[i].Item4 + CELCIUS);
+                }
+
 				toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 				{
 					toolTipWindow.Hide();
