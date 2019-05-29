@@ -96,7 +96,7 @@ namespace Gadget.Widgets.Weather
 					int posX = (width - _weatherData.TodayWeatherImage.Width) / 2;
 					graphics.DrawImageUnscaledAndClipped(_weatherData.TodayWeatherImage, new Rectangle(posX, height, _weatherData.TodayWeatherImage.Width, _weatherData.TodayWeatherImage.Height));
 					height = height + _weatherData.TodayWeatherImage.Height;
-					graphics.DrawString("Sun Rise/Set " + _weatherData.CurrentSunRise + "/" + _weatherData.CurrentSunSet, _font, _brush, 5, height);
+					graphics.DrawString($"Sun Rise/Set {_weatherData.SunRise}/{_weatherData.SunSet}", _font, _brush, 5, height);
 				}
 				else
 				{
@@ -134,7 +134,7 @@ namespace Gadget.Widgets.Weather
                     }
 
                     title.Add(_weatherData.DayForcast[i].Item1);
-                    image.Add(GetImage(_weatherData.DayForcast[i].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime));
+                    image.Add(GetImage(_weatherData.DayForcast[i].Item2));
                     text.Add(_weatherData.DayForcast[i].Item3 + " " + _weatherData.DayForcast[i].Item4 + CELCIUS);
                 }
 
@@ -175,32 +175,40 @@ namespace Gadget.Widgets.Weather
 		{
 			var dateTime = DateTime.Now;
 			bool isDayNow = false;
-			if (dateTime.TimeOfDay > _weatherData.CurrentSunRiseDateTime.TimeOfDay && dateTime.TimeOfDay < _weatherData.CurrentSunSetDateTime.TimeOfDay)
+			if (dateTime.TimeOfDay > _weatherData.SunRiseDateTime.TimeOfDay && dateTime.TimeOfDay < _weatherData.SunSetDateTime.TimeOfDay)
 				isDayNow = true;
 			if (_weatherData.IsDayNow != isDayNow)
 			{
 				if (_weatherData.DayForcast.Count > 0)
 				{
-					_weatherData.TodayWeatherImage = GetImage(_weatherData.DayForcast[0].Item2, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime);
+					_weatherData.TodayWeatherImage = GetImage(_weatherData.DayForcast[0].Item2, _weatherData.SunRiseDateTime, _weatherData.SunSetDateTime);
 					_weatherData.IsDayNow = isDayNow;
 				}
 				else
-					_weatherData.TodayWeatherImage = GetImage(null, _weatherData.CurrentSunRiseDateTime, _weatherData.CurrentSunSetDateTime);
+					_weatherData.TodayWeatherImage = GetImage(null, _weatherData.SunRiseDateTime, _weatherData.SunSetDateTime);
 			}
 		}
 
-		private static Image GetImage(string name, DateTime currentSunRiseDateTime, DateTime currentSunSetDateTime)
+        private static Image GetImage(string name, DateTime sunRise, DateTime sunSet)
+        {
+            var now = DateTime.Now;
+            var dayOrNight = now.TimeOfDay > sunRise.TimeOfDay && now.TimeOfDay < sunSet.TimeOfDay
+                ? ""
+                : "2";
+
+            return GetImage(name + dayOrNight);
+        }
+
+        private static Image GetImage(string name)
 		{
-			var dateTime = DateTime.Now;
-			string end;
-            if (!(dateTime.TimeOfDay > currentSunRiseDateTime.TimeOfDay && dateTime.TimeOfDay < currentSunSetDateTime.TimeOfDay))
-                end = "2";
-            else
-                end = "";
-            if (File.Exists("Resources\\Weather\\w" + name + end + ".png"))
-				return Image.FromFile("Resources\\Weather\\w" + name + end + ".png");
-			else
-				return new Bitmap(140, 90);
+            var file = $"Resources\\Weather\\{name.ToLower()}.png";
+
+            if (File.Exists(file))
+            {
+                return Image.FromFile(file);
+            }
+
+            return new Bitmap(140, 90);
 		}
 
 		private static WeatherData GetWeather(string url)
@@ -227,61 +235,61 @@ namespace Gadget.Widgets.Weather
 				string[] strArray = GetTextArray(data);
 				if (strArray.Length == 3)
 				{
-					weatherData.CurrentTemperature = GetTemperature(strArray[0] + strArray[1]);
-					weatherData.CurrentWeather = strArray[2];
+					weatherData.Temperature = GetTemperature(strArray[0] + strArray[1]);
+					weatherData.Weather = strArray[2];
 				}
 				else if (strArray.Length == 4)
 				{
-					weatherData.CurrentTemperature = GetTemperature(strArray[0] + strArray[1]);
-					weatherData.CurrentWind = strArray[2];
-					weatherData.CurrentWeather = strArray[3];
+					weatherData.Temperature = GetTemperature(strArray[0] + strArray[1]);
+					weatherData.Wind = strArray[2];
+					weatherData.Weather = strArray[3];
 				}
 
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentTemperatureFeelsLike = GetTemperature(html.Substring(0, index));
+				weatherData.TemperatureFeelsLike = GetTemperature(html.Substring(0, index));
 
 				text = "Barometer:  <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentBarometer = html.Substring(0, index).Trim();
+				weatherData.Barometer = html.Substring(0, index).Trim();
 
 				text = "Dewpoint:   <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentTemperatureDewpoint = GetTemperature(html.Substring(0, index));
+				weatherData.TemperatureDewpoint = GetTemperature(html.Substring(0, index));
 
 				text = "Humidity:   <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentHumidity = html.Substring(0, index).Trim();
+				weatherData.Humidity = html.Substring(0, index).Trim();
 
 				text = "Visibility: <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentVisibility = html.Substring(0, index).Trim();
+				weatherData.Visibility = html.Substring(0, index).Trim();
 
 				text = "Sun rise: <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentSunRise = html.Substring(0, index).Trim();
+				weatherData.SunRise = html.Substring(0, index).Trim();
                 DateTime currentSunRiseDateTime;
-                DateTime.TryParseExact(weatherData.CurrentSunRise, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunRiseDateTime);
-                weatherData.CurrentSunRiseDateTime = currentSunRiseDateTime;
+                DateTime.TryParseExact(weatherData.SunRise, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunRiseDateTime);
+                weatherData.SunRiseDateTime = currentSunRiseDateTime;
 
                 text = "Sun set:  <strong>";
 				index = html.IndexOf(text);
 				html = html.Substring(index + text.Length, html.Length - index - text.Length);
 				index = html.IndexOf("<");
-				weatherData.CurrentSunSet = html.Substring(0, index).Trim();
+				weatherData.SunSet = html.Substring(0, index).Trim();
                 DateTime currentSunSetDateTime;
-                DateTime.TryParseExact(weatherData.CurrentSunSet, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunSetDateTime);
-                weatherData.CurrentSunSetDateTime = currentSunSetDateTime;
+                DateTime.TryParseExact(weatherData.SunSet, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunSetDateTime);
+                weatherData.SunSetDateTime = currentSunSetDateTime;
 
                 myRequest = (HttpWebRequest)WebRequest.Create(url + "?tenday");
 				myResponse = myRequest.GetResponse();
@@ -324,8 +332,8 @@ namespace Gadget.Widgets.Weather
 				}
 
 				weatherData.IsDayNow = true;
-				if (weatherData.DayForcast.Count > 0 && File.Exists("Resources\\Weather\\w" + weatherData.DayForcast[0].Item2 + ".png"))
-					weatherData.TodayWeatherImage = Image.FromFile("Resources\\Weather\\w" + weatherData.DayForcast[0].Item2 + ".png");
+				if (weatherData.DayForcast.Count > 0 && File.Exists("Resources\\Weather\\" + weatherData.DayForcast[0].Item2 + ".png"))
+					weatherData.TodayWeatherImage = Image.FromFile("Resources\\Weather\\" + weatherData.DayForcast[0].Item2 + ".png");
 				else
 					weatherData.TodayWeatherImage = new Bitmap(140, 90);
 			}

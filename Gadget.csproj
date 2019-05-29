@@ -330,94 +330,100 @@
     <Content Include="Resources\Time\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wClear.png">
+    <Content Include="Resources\Weather\clear.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wClear2.png">
+    <Content Include="Resources\Weather\clear2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy and light snow.png">
+    <Content Include="Resources\Weather\cloudy and light snow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy and light snow2.png">
+    <Content Include="Resources\Weather\cloudy and light snow2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy and showers.png">
+    <Content Include="Resources\Weather\cloudy and showers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy and showers2.png">
+    <Content Include="Resources\Weather\cloudy and showers2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy, thunderstorms with rain.png">
+    <Content Include="Resources\Weather\cloudy, thunderstorms with rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy, thunderstorms with rain2.png">
+    <Content Include="Resources\Weather\cloudy, thunderstorms with rain2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy.png">
+    <Content Include="Resources\Weather\cloudy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wCloudy2.png">
+    <Content Include="Resources\Weather\cloudy2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wMostly clear.png">
+    <Content Include="Resources\Weather\mostly clear.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wMostly clear2.png">
+    <Content Include="Resources\Weather\mostly clear2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wMostly cloudy.png">
+    <Content Include="Resources\Weather\mostly cloudy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wMostly cloudy2.png">
+    <Content Include="Resources\Weather\mostly cloudy2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light rain.png">
+    <Content Include="Resources\Weather\overcast and light rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light rain2.png">
+    <Content Include="Resources\Weather\overcast and light rain2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light snow.png">
+    <Content Include="Resources\Weather\overcast and light snow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light snow2.png">
+    <Content Include="Resources\Weather\overcast and light snow2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light wet snow.png">
+    <Content Include="Resources\Weather\overcast and light wet snow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and light wet snow2.png">
+    <Content Include="Resources\Weather\overcast and light wet snow2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and rain.png">
+    <Content Include="Resources\Weather\overcast and rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and rain2.png">
+    <Content Include="Resources\Weather\overcast and rain2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and showers.png">
+    <Content Include="Resources\Weather\overcast and showers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast and showers2.png">
+    <Content Include="Resources\Weather\overcast and showers2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast.png">
+    <Content Include="Resources\Weather\overcast.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wOvercast2.png">
+    <Content Include="Resources\Weather\overcast2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wPartly cloudy and showers.png">
+    <Content Include="Resources\Weather\partly cloudy and light rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wPartly cloudy and showers2.png">
+    <Content Include="Resources\Weather\partly cloudy and light rain2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wPartly cloudy.png">
+    <Content Include="Resources\Weather\partly cloudy and showers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Weather\wPartly cloudy2.png">
+    <Content Include="Resources\Weather\partly cloudy and showers2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Weather\partly cloudy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Weather\partly cloudy2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
