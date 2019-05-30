@@ -66,9 +66,9 @@ namespace Gadget.Widgets.Time
 			_brush = new SolidBrush(Color);
 
 			_time = new Image[11];
-			for (int i = 0; i < 11; i++)
+			for (int i = 0; i < _time.Length; i++)
 			{
-				_time[i] = Image.FromFile("Resources\\Time\\" + i.ToString("00") + ".png");
+				_time[i] = Image.FromFile($"Resources\\Time\\{i.ToString("00")}.png");
 			}
 
             _alarmDateTime = GetAlarmDateTime(TimeType, Hour, Minute);

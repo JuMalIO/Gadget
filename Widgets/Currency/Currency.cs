@@ -181,7 +181,7 @@ namespace Gadget.Widgets.Currency
 		public bool ShowProperties()
 		{
             var currencyUserControl = new CurrencyUserControl(_currencyDataList, VisibleCurrency, CurrencyShort, (int)CurrencyType);
-			var propertiesForm = new PropertiesForm(this, new UserControl[] { currencyUserControl });
+			var propertiesForm = new PropertiesForm(this, new [] { currencyUserControl });
 			if (propertiesForm.ShowDialog() == DialogResult.OK)
 			{
 				VisibleCurrency = currencyUserControl.VisibleCurrency;
@@ -236,7 +236,7 @@ namespace Gadget.Widgets.Currency
 							currencyData.Money[CurrencyType.BankSellsCash] = strArray[3];
 							currencyData.Money[CurrencyType.BankSellsTransfer] = strArray[4];
 							currencyData.Money[CurrencyType.BankOfLithuania] = strArray[5];
-							string str = visibleCurrency.FirstOrDefault(item => item == currencyData.CurrencyShort);
+							string str = visibleCurrency.FirstOrDefault(x => x == currencyData.CurrencyShort);
 							if (str != null)
 								currencyData.Visible = true;
 							else

@@ -35,7 +35,7 @@ namespace Gadget.Widgets.Currency
         {
             get
             {
-                return treeView.Nodes.Cast<TreeNode>().Where(i => i.Checked).Select(i => i.Name).ToList();
+                return treeView.Nodes.Cast<TreeNode>().Where(x => x.Checked).Select(x => x.Name).ToList();
             }
             private set
             {

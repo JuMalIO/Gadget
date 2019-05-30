@@ -82,8 +82,8 @@ namespace Gadget.Widgets.Time
 		{
 			InitializeComponent();
 
-            comboBox1.Items.AddRange(Enum.GetValues(typeof(AlarmType)).Cast<AlarmType>().Select(i => i.ToString()).ToArray());
-            comboBox2.Items.AddRange(Enum.GetValues(typeof(TimeType)).Cast<TimeType>().Select(i => i.ToString()).ToArray());
+            comboBox1.Items.AddRange(Enum.GetValues(typeof(AlarmType)).Cast<AlarmType>().Select(x => x.ToString()).ToArray());
+            comboBox2.Items.AddRange(Enum.GetValues(typeof(TimeType)).Cast<TimeType>().Select(x => x.ToString()).ToArray());
 
             Hour = hour;
 			Minute = minute;

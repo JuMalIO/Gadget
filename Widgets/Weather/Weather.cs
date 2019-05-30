@@ -158,7 +158,7 @@ namespace Gadget.Widgets.Weather
 		public bool ShowProperties()
         {
             var weatherUserControl = new WeatherUserControl(Url);
-            var propertiesForm = new PropertiesForm(this, new UserControl[] { weatherUserControl });
+            var propertiesForm = new PropertiesForm(this, new [] { weatherUserControl });
 			if (propertiesForm.ShowDialog() == DialogResult.OK)
 			{
                 Url = weatherUserControl.Url;

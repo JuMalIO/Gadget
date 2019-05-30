@@ -81,41 +81,29 @@ namespace Gadget.Widgets.Computer
 
 		private static Image GetHardwareIcon(HardwareType hardwareType)
 		{
-			Image icon;
 			switch (hardwareType)
 			{
 				case HardwareType.CPU:
-					icon = Image.FromFile("Resources\\Icons\\cpu.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\cpu.png");
 				case HardwareType.GpuNvidia:
-					icon = Image.FromFile("Resources\\Icons\\nvidia.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\nvidia.png");
 				case HardwareType.GpuAti:
-					icon = Image.FromFile("Resources\\Icons\\ati.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\ati.png");
 				case HardwareType.HDD:
-					icon = Image.FromFile("Resources\\Icons\\hdd.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\hdd.png");
 				case HardwareType.Heatmaster:
-					icon = Image.FromFile("Resources\\Icons\\bigng.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\bigng.png");
 				case HardwareType.Mainboard:
-					icon = Image.FromFile("Resources\\Icons\\mainboard.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\mainboard.png");
 				case HardwareType.SuperIO:
-					icon = Image.FromFile("Resources\\Icons\\chip.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\chip.png");
 				case HardwareType.TBalancer:
-					icon = Image.FromFile("Resources\\Icons\\bigng.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\bigng.png");
 				case HardwareType.RAM:
-					icon = Image.FromFile("Resources\\Icons\\ram.png");
-					break;
+                    return Image.FromFile("Resources\\Icons\\ram.png");
 				default:
-					icon = new Bitmap(1, 1);
-					break;
+                    return new Bitmap(1, 1);
 			}
-			return icon;
 		}
 	}
 }

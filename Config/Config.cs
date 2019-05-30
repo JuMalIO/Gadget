@@ -64,10 +64,10 @@ namespace Gadget.Config
 
             int pos = 0;
 
-            foreach (var hardware in computer.Hardware.OrderBy(item => item.HardwareType))
+            foreach (var hardware in computer.Hardware.OrderBy(x => x.HardwareType))
             {
                 var id = hardware.Identifier.ToString();
-                var widgetHardware = Hardwares.FirstOrDefault(item => item.Id == id);
+                var widgetHardware = Hardwares.FirstOrDefault(x => x.Id == id);
                 if (widgetHardware == null)
                 {
                     widgetHardware = new Hardware
@@ -88,7 +88,7 @@ namespace Gadget.Config
                 foreach (var sensor in hardware.Sensors)
                 {
                     id = sensor.Identifier.ToString();
-                    var widgetSensor = Sensors.FirstOrDefault(item => item.Id == id);
+                    var widgetSensor = Sensors.FirstOrDefault(x => x.Id == id);
                     if (widgetSensor == null)
                     {
                         widgetSensor = new Sensor
@@ -113,7 +113,7 @@ namespace Gadget.Config
                     var graph = Graph.GetName(hardware.HardwareType);
                     if (graph != null)
                     {
-                        var widgetGraph = Graphs.FirstOrDefault(item => item.Id == graph);
+                        var widgetGraph = Graphs.FirstOrDefault(x => x.Id == graph);
                         if (widgetGraph == null)
                         {
                             widgetGraph = new Graph

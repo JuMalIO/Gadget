@@ -49,7 +49,7 @@ namespace Gadget.Config
         {
             InitializeComponent();
 
-            comboBox1.Items.AddRange(Enum.GetValues(typeof(ClickType)).Cast<ClickType>().Where(i => i != ClickType.Disabled).Select(i => i.ToString()).ToArray());
+            comboBox1.Items.AddRange(Enum.GetValues(typeof(ClickType)).Cast<ClickType>().Where(x => x != ClickType.Disabled).Select(x => x.ToString()).ToArray());
 
             if (clickType == ClickType.Disabled)
             {

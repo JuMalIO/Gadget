@@ -84,7 +84,19 @@ namespace Gadget.Widgets.Computer
 
         public static Color GetColor(int index)
         {
-            var colors = new Color[] { Color.LightBlue, Color.Cyan, Color.Chartreuse, Color.Yellow, Color.Orange, Color.Pink, Color.HotPink, Color.OrangeRed, Color.MediumPurple, Color.DeepSkyBlue };
+            var colors = new []
+            {
+                Color.LightBlue,
+                Color.Cyan,
+                Color.Chartreuse,
+                Color.Yellow,
+                Color.Orange,
+                Color.Pink,
+                Color.HotPink,
+                Color.OrangeRed,
+                Color.MediumPurple,
+                Color.DeepSkyBlue
+            };
             return colors[index % colors.Length];
         }
 

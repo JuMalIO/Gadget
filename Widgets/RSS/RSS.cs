@@ -187,7 +187,7 @@ namespace Gadget.Widgets.RSS
 		public bool ShowProperties()
 		{
             var rssUserControl = new RSSUserControl(NewColor, MaxTitles, RssLinks);
-			var propertiesForm = new PropertiesForm(this, new UserControl[] { rssUserControl });
+			var propertiesForm = new PropertiesForm(this, new [] { rssUserControl });
 			if (propertiesForm.ShowDialog() == DialogResult.OK)
 			{
                 NewColor = rssUserControl.Color;
@@ -213,7 +213,7 @@ namespace Gadget.Widgets.RSS
 					reader.Close();
 					foreach (SyndicationItem syndicationItem in feed.Items)
 					{
-						if (!rssDataList.Any(item => item.Link == syndicationItem.Id))
+						if (!rssDataList.Any(x => x.Link == syndicationItem.Id))
 						{
 							RSSData rssData = new RSSData();
 							List<Uri> uriList = null;
