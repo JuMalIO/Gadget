@@ -74,7 +74,7 @@ namespace OpenHardwareMonitor.GUI
                         // check if the taskscheduler is running
                         IRunningTaskCollection collection = scheduler.GetRunningTasks(0);
 
-                        ITaskFolder folder = scheduler.GetFolder("\\" + name);
+                        ITaskFolder folder = scheduler.GetFolder($"\\{name}");
                         IRegisteredTask task = folder.GetTask("Startup");
                         startup = (task != null) &&
                           (task.Definition.Triggers.Count > 0) &&
@@ -139,7 +139,7 @@ namespace OpenHardwareMonitor.GUI
         {
             ITaskDefinition definition = scheduler.NewTask(0);
             definition.RegistrationInfo.Description =
-              "This task starts the " + name + " on Windows startup.";
+              $"This task starts the {name} on Windows startup.";
             definition.Principal.RunLevel =
               TASK_RUNLEVEL.TASK_RUNLEVEL_HIGHEST;
             definition.Settings.DisallowStartIfOnBatteries = false;

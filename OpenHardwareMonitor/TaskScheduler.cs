@@ -975,4 +975,3 @@ namespace OpenHardwareMonitor.TaskScheduler
         public virtual extern string TargetServer { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0)] get; }
     }
 }
-
