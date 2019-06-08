@@ -8,6 +8,6 @@ namespace Gadget.Widgets
         ClickType ClickType { get; set; }
         string ClickParameter { get; set; }
 
-        void Click(Point MouseLocation, int startFromHeight);
+        void Click(Point mouseLocation, int startFromHeight);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Gadget.Widgets.Weather
 {
@@ -21,6 +22,6 @@ namespace Gadget.Widgets.Weather
         public DateTime SunRise { get; set; }
         public DateTime SunSet { get; set; }
         public List<TemperatureData> TemperatureData { get; set; } = new List<TemperatureData>();
-        public string ForecastLink { get; set; }
+        public Image ForecastImage { get; set; }
     }
 }

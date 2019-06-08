@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Gadget.Widgets;
+using System.Collections.Generic;
 
-namespace Gadget.Widgets
+namespace Gadget.Extensions
 {
-    public static class Extensions
+    public static class ListExtensions
     {
         public static void SortByPosition(this List<IWidget> list)
         {

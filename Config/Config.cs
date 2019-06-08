@@ -1,4 +1,5 @@
-﻿using Gadget.Utilities;
+﻿using Gadget.Extensions;
+using Gadget.Utilities;
 using Gadget.Widgets;
 using Gadget.Widgets.Computer;
 using Gadget.Widgets.Currency;

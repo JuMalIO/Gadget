@@ -55,17 +55,9 @@ namespace Gadget.Widgets.Weather
 
         #endregion
 
+        #region static readonly constants
 
-        private int _updateInternetCount;
-        private Font _font;
-		private Brush _brush;
-		private WeatherData _weatherData;
-        private Image _weatherImage;
-        private bool _isDayTime;
-        
-        private const string Celcius = " °C";
-
-        #region Weather image list
+        private static readonly string Celcius = "°C";
 
         private static readonly Dictionary<string, Image[]> WeatherImages = new Dictionary<string, Image[]>
         {
@@ -201,6 +193,13 @@ namespace Gadget.Widgets.Weather
 
         #endregion
 
+        private int _updateInternetCount;
+        private Font _font;
+		private Brush _brush;
+		private WeatherData _weatherData;
+        private Image _weatherImage;
+        private bool _isDayTime;
+
         public void Initiate()
 		{
             _weatherImage = new Bitmap(140, 90);
@@ -230,23 +229,21 @@ namespace Gadget.Widgets.Weather
 			if (_weatherData != null && _weatherData.TemperatureData.Count > 0)
 			{
 				graphics.DrawString(_weatherData.TemperatureData[0].Weather, _font, _brush, 5, height);
-				string date = _weatherData.TemperatureData[0].TemperatureLow + " " + _weatherData.TemperatureData[0].TemperatureHigh + Celcius;
+				string date = $"{_weatherData.TemperatureData[0].TemperatureLow} {_weatherData.TemperatureData[0].TemperatureHigh} {Celcius}";
 				int textWidth = (int)graphics.MeasureString(date, _font).Width;
 				graphics.DrawString(date, _font, _brush, width - textWidth - 5, height);
-				height = height + _font.Height;
+				height += _font.Height;
 				int posX = (width - _weatherImage.Width) / 2;
 				graphics.DrawImageUnscaledAndClipped(_weatherImage, new Rectangle(posX, height, _weatherImage.Width, _weatherImage.Height));
-				height = height + _weatherImage.Height;
+				height += _weatherImage.Height;
 				graphics.DrawString($"Sun Rise/Set {_weatherData.SunRise:HH:mm}/{_weatherData.SunSet:HH:mm}", _font, _brush, 5, height);
 			}
 			else
 			{
 				graphics.DrawString("No weather update.", _font, _brush, 5, height);
-				height = height + _font.Height;
-				if (_weatherImage != null)
-					height = height + _weatherImage.Height;
+				height += _font.Height + _weatherImage.Height;
 			}
-			height = height + _font.Height + 5;
+			height += _font.Height + 5;
 		}
 
 		public void Update()
@@ -258,33 +255,17 @@ namespace Gadget.Widgets.Weather
 			Gadget.ProcessManager.Process(ClickType, ClickParameter);
 		}
 
-		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point applicationLocation, Point mouseLocation, int startFromHeight)
 		{
-			if (_weatherData != null && _weatherData.TemperatureData.Count > 1)
+			if (_weatherData != null)
 			{
-				var title = new List<string>();
-				var text = new List<string>();
-				var image = new List<Image>();
-
-                for (var i = 1; i <= 3; i++)
-                {
-                    if (_weatherData.TemperatureData.Count <= i)
-                    {
-                        break;
-                    }
-
-                    title.Add(_weatherData.TemperatureData[i].Day);
-                    image.Add(GetImage(_weatherData.TemperatureData[i].Weather));
-                    text.Add(_weatherData.TemperatureData[i].TemperatureLow + " " + _weatherData.TemperatureData[i].TemperatureHigh + Celcius);
-                }
-
                 var toolTipWindow = new Gadget.ToolTip();
                 toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 				{
 					toolTipWindow.Hide();
 					Gadget.ProcessManager.Process(ClickType, ClickParameter);
 				};
-				toolTipWindow.Show(new Point(ApplicationLocation.X + MouseLocation.X, ApplicationLocation.Y + MouseLocation.Y), title, text, _font, _brush, image);
+				toolTipWindow.Show(new Point(applicationLocation.X + mouseLocation.X, applicationLocation.Y + mouseLocation.Y), _weatherData.ForecastImage);
 			}
 		}
 
@@ -328,7 +309,7 @@ namespace Gadget.Widgets.Weather
 		{
 			try
 			{
-                var html = Request.GetHtml(url);
+                var html = Web.GetHtml(url);
 
 				html = html.CutAfterText("Current conditions");
 
@@ -383,6 +364,7 @@ namespace Gadget.Widgets.Weather
 
                 html = html.CutAfterText("<img src=\"");
                 var forecastLink = url.CutAfterText("//").CutBeforeText("/") + html.CutBeforeText("\"");
+                var forecastImage = Web.GetImage(forecastLink);
 
                 return new WeatherData
                 {
@@ -394,7 +376,7 @@ namespace Gadget.Widgets.Weather
                     SunRise = sunRise,
                     SunSet = sunSet,
                     TemperatureData = temperatureData,
-                    ForecastLink = forecastLink
+                    ForecastImage = forecastImage
                 };
 			}
 			catch

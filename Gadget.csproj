@@ -112,7 +112,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\NativeMethods.cs" />
-    <Compile Include="Utilities\Request.cs" />
+    <Compile Include="Utilities\Web.cs" />
     <Compile Include="Widgets\Currency\CurrencyData.cs" />
     <Compile Include="Widgets\Currency\CurrencyType.cs" />
     <Compile Include="Widgets\Currency\CurrencyUserControl.cs">
@@ -146,7 +146,7 @@
     </Compile>
     <Compile Include="Widgets\Currency\Currency.cs" />
     <Compile Include="Widgets\Date\Date.cs" />
-    <Compile Include="Widgets\Extensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Widgets\Graph\Graph.cs" />
     <Compile Include="Widgets\IWidgetWithHover.cs" />
     <Compile Include="Widgets\IWidgetWithClick.cs" />
