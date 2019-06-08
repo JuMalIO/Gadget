@@ -1,5 +1,4 @@
-﻿using Gadget.Gadget;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Gadget.Widgets
 {
@@ -7,6 +6,6 @@ namespace Gadget.Widgets
     {
         bool IsHoverable { get; set; }
 
-        void Hover(ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight);
+        void Hover(Point applicationLocation, Point mouseLocation, int startFromHeight);
     }
 }

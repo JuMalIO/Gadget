@@ -1,11 +1,9 @@
+using Gadget.Properties;
 using Gadget.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Gadget.Gadget
@@ -37,14 +35,14 @@ namespace Gadget.Gadget
 			CreateHandle(CreateParams);
 			NativeMethods.PreventFadingToGlass(Handle);
 
-			_borderTopLeft = Image.FromFile("Resources\\Border\\topLeft.png");
-			_borderTop = Image.FromFile("Resources\\Border\\top.png");
-			_borderTopRight = Image.FromFile("Resources\\Border\\topRight.png");
-			_borderRight = Image.FromFile("Resources\\Border\\right.png");
-			_borderBottomRight = Image.FromFile("Resources\\Border\\bottomRight.png");
-			_borderBottom = Image.FromFile("Resources\\Border\\bottom.png");
-			_borderBottomLeft = Image.FromFile("Resources\\Border\\bottomLeft.png");
-			_borderLeft = Image.FromFile("Resources\\Border\\left.png");
+			_borderTopLeft = Resources.top_left;
+			_borderTop = Resources.top;
+			_borderTopRight = Resources.top_right;
+			_borderRight = Resources.right;
+			_borderBottomRight = Resources.bottom_right;
+			_borderBottom = Resources.bottom;
+			_borderBottomLeft = Resources.bottom_left;
+			_borderLeft = Resources.left;
 		}
 
 		protected virtual CreateParams CreateParams

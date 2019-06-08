@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -68,7 +69,7 @@ namespace Gadget.Widgets.Time
 			_time = new Image[11];
 			for (int i = 0; i < _time.Length; i++)
 			{
-				_time[i] = Image.FromFile($"Resources\\Time\\{i.ToString("00")}.png");
+				_time[i] = (Image)Resources.ResourceManager.GetObject($"_{i.ToString("00")}");
 			}
 
             _alarmDateTime = GetAlarmDateTime(TimeType, Hour, Minute);
@@ -131,9 +132,10 @@ namespace Gadget.Widgets.Time
             }
 		}
 
-		public void Hover(Gadget.ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
 		{
-			toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
+            var toolTipWindow = new Gadget.ToolTip();
+            toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 			{
 				toolTipWindow.Hide();
 				Click(default(Point), 0);

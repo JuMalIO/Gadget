@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,9 +13,9 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Gadget.Widgets.RSS
+namespace Gadget.Widgets.Rss
 {
-	public class RSS : IWidget, IWidgetWithText, IWidgetWithIcon, IWidgetWithClick, IWidgetWithHover, IWidgetWithInternet
+	public class Rss : IWidget, IWidgetWithText, IWidgetWithIcon, IWidgetWithClick, IWidgetWithHover, IWidgetWithInternet
     {
         #region public properties IWidget
 
@@ -67,7 +68,7 @@ namespace Gadget.Widgets.RSS
 
         #endregion
 
-        private List<RSSData> _rssDataList;
+        private List<RssData> _rssDataList;
         private int _updateInternetCount;
 		private Font _font;
 		private Brush _brush;
@@ -76,11 +77,11 @@ namespace Gadget.Widgets.RSS
 
 		public void Initiate()
 		{
-			_rssDataList = new List<RSSData>();
+			_rssDataList = new List<RssData>();
 			_font = new Font(FontName, FontSize, FontStyle.Regular);
 			_brush = new SolidBrush(Color);
 			_newBrush = new SolidBrush(NewColor);
-			_image = Image.FromFile("Resources\\Icons\\rss.png");
+			_image = Resources.rss;
         }
 
 		public void UpdateInternet()
@@ -88,7 +89,7 @@ namespace Gadget.Widgets.RSS
 			_updateInternetCount++;
 			if (UpdateInternetInterval < _updateInternetCount || _rssDataList.Count == 0)
 			{
-				GetRSSFeed(RssLinks, MaxTitles, ref _rssDataList);
+				GetRssFeed(RssLinks, MaxTitles, ref _rssDataList);
 				_updateInternetCount = 0;
 			}
 		}
@@ -148,7 +149,7 @@ namespace Gadget.Widgets.RSS
 			}
 		}
 
-		public void Hover(Gadget.ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
 		{
 			if (IsIconVisible)
 			{
@@ -160,7 +161,8 @@ namespace Gadget.Widgets.RSS
 				if (_rssDataList.Count > x && x < MaxTitles && x >= 0)
 				{
 					_rssDataList[x].IsNew = false;
-					toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
+                    var toolTipWindow = new Gadget.ToolTip();
+                    toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 					{
 						toolTipWindow.Hide();
 						System.Diagnostics.Process.Start(_rssDataList[x].Link);
@@ -186,7 +188,7 @@ namespace Gadget.Widgets.RSS
 
 		public bool ShowProperties()
 		{
-            var rssUserControl = new RSSUserControl(NewColor, MaxTitles, RssLinks);
+            var rssUserControl = new RssUserControl(NewColor, MaxTitles, RssLinks);
 			var propertiesForm = new PropertiesForm(this, new [] { rssUserControl });
 			if (propertiesForm.ShowDialog() == DialogResult.OK)
 			{
@@ -202,7 +204,7 @@ namespace Gadget.Widgets.RSS
 			return false;
 		}
 
-		public static void GetRSSFeed(List<string> rssLinks, int max, ref List<RSSData> rssDataList)
+		public static void GetRssFeed(List<string> rssLinks, int max, ref List<RssData> rssDataList)
 		{
 			try
 			{
@@ -215,7 +217,7 @@ namespace Gadget.Widgets.RSS
 					{
 						if (!rssDataList.Any(x => x.Link == syndicationItem.Id))
 						{
-							RSSData rssData = new RSSData();
+							RssData rssData = new RssData();
 							List<Uri> uriList = null;
 							if (syndicationItem.Content != null)
 							{

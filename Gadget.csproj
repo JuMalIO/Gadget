@@ -80,6 +80,7 @@
     <Compile Include="Config\InternetUserControl.Designer.cs">
       <DependentUpon>InternetUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Gadget\NotificationIcon.cs" />
     <Compile Include="Gadget\ProcessManager.cs" />
     <Compile Include="Config\ClickUserControl.cs">
@@ -105,7 +106,13 @@
     <Compile Include="Gadget\ToolTip.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="OpenHardwareMonitor\UpdateVisitor.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\NativeMethods.cs" />
+    <Compile Include="Utilities\Request.cs" />
     <Compile Include="Widgets\Currency\CurrencyData.cs" />
     <Compile Include="Widgets\Currency\CurrencyType.cs" />
     <Compile Include="Widgets\Currency\CurrencyUserControl.cs">
@@ -145,12 +152,12 @@
     <Compile Include="Widgets\IWidgetWithClick.cs" />
     <Compile Include="Widgets\IWidget.cs" />
     <Compile Include="Widgets\IWidgetWithIcon.cs" />
-    <Compile Include="Widgets\RSS\RSSData.cs" />
-    <Compile Include="Widgets\RSS\RSSUserControl.cs">
+    <Compile Include="Widgets\Rsss\RssData.cs" />
+    <Compile Include="Widgets\Rsss\RssUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Widgets\RSS\RSSUserControl.Designer.cs">
-      <DependentUpon>RSSUserControl.cs</DependentUpon>
+    <Compile Include="Widgets\Rsss\RssUserControl.Designer.cs">
+      <DependentUpon>RssUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Widgets\ClickType.cs" />
     <Compile Include="Widgets\Time\AlarmType.cs" />
@@ -158,7 +165,7 @@
     <Compile Include="Widgets\Weather\WeatherData.cs" />
     <Compile Include="Widgets\IWidgetWithText.cs" />
     <Compile Include="Widgets\IWidgetWithInternet.cs" />
-    <Compile Include="Widgets\RSS\RSS.cs" />
+    <Compile Include="Widgets\Rsss\Rss.cs" />
     <Compile Include="Widgets\Time\ActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,16 +215,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Widgets\RSS\RSSUserControl.resx">
-      <DependentUpon>RSSUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Widgets\Rsss\RssUserControl.resx">
+      <DependentUpon>RssUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Widgets\Time\ActionForm.resx">
       <DependentUpon>ActionForm.cs</DependentUpon>
@@ -242,190 +244,68 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Border\bottom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\bottomLeft.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\bottomRight.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\top.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\topLeft.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Border\topRight.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\Border\bottom.png" />
+    <Content Include="Resources\Border\bottom_left.png" />
+    <Content Include="Resources\Border\bottom_right.png" />
+    <Content Include="Resources\Border\left.png" />
+    <Content Include="Resources\Border\right.png" />
+    <Content Include="Resources\Border\top.png" />
+    <Content Include="Resources\Border\top_left.png" />
+    <Content Include="Resources\Border\top_right.png" />
     <Content Include="Resources\Gadget.ico" />
-    <Content Include="Resources\Icons\ati.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\bigng.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\chip.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\cpu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\currency.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\hdd.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\mainboard.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\nvidia.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\ram.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\rss.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\00.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\07.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\08.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\09.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Time\10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\clear.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\clear2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy and light snow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy and light snow2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy and showers.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy and showers2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy, thunderstorms with rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy, thunderstorms with rain2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\cloudy2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\mostly clear.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\mostly clear2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\mostly cloudy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\mostly cloudy2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light rain2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light snow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light snow2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light wet snow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and light wet snow2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and rain2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and showers.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast and showers2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\overcast2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy and light rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy and light rain2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy and showers.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy and showers2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Weather\partly cloudy2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\Icons\ati.png" />
+    <Content Include="Resources\Icons\bigng.png" />
+    <Content Include="Resources\Icons\chip.png" />
+    <Content Include="Resources\Icons\cpu.png" />
+    <Content Include="Resources\Icons\currency.png" />
+    <Content Include="Resources\Icons\hdd.png" />
+    <Content Include="Resources\Icons\mainboard.png" />
+    <Content Include="Resources\Icons\nvidia.png" />
+    <Content Include="Resources\Icons\ram.png" />
+    <Content Include="Resources\Icons\rss.png" />
+    <Content Include="Resources\Time\00.png" />
+    <Content Include="Resources\Time\01.png" />
+    <Content Include="Resources\Time\02.png" />
+    <Content Include="Resources\Time\03.png" />
+    <Content Include="Resources\Time\04.png" />
+    <Content Include="Resources\Time\05.png" />
+    <Content Include="Resources\Time\06.png" />
+    <Content Include="Resources\Time\07.png" />
+    <Content Include="Resources\Time\08.png" />
+    <Content Include="Resources\Time\09.png" />
+    <Content Include="Resources\Time\10.png" />
+    <Content Include="Resources\Weather\clear_day.png" />
+    <Content Include="Resources\Weather\clear_night.png" />
+    <Content Include="Resources\Weather\cloudy_and_light_snow_day.png" />
+    <Content Include="Resources\Weather\cloudy_and_light_snow_night.png" />
+    <Content Include="Resources\Weather\cloudy_and_showers_day.png" />
+    <Content Include="Resources\Weather\cloudy_and_showers_night.png" />
+    <Content Include="Resources\Weather\cloudy_thunderstorms_with_rain_day.png" />
+    <Content Include="Resources\Weather\cloudy_thunderstorms_with_rain_night.png" />
+    <Content Include="Resources\Weather\cloudy_day.png" />
+    <Content Include="Resources\Weather\cloudy_night.png" />
+    <Content Include="Resources\Weather\mostly_clear_day.png" />
+    <Content Include="Resources\Weather\mostly_clear_night.png" />
+    <Content Include="Resources\Weather\mostly_cloudy_day.png" />
+    <Content Include="Resources\Weather\mostly_cloudy_night.png" />
+    <Content Include="Resources\Weather\overcast_and_light_rain_day.png" />
+    <Content Include="Resources\Weather\overcast_and_light_rain_night.png" />
+    <Content Include="Resources\Weather\overcast_and_light_snow_day.png" />
+    <Content Include="Resources\Weather\overcast_and_light_snow_night.png" />
+    <Content Include="Resources\Weather\overcast_and_light_wet_snow_day.png" />
+    <Content Include="Resources\Weather\overcast_and_light_wet_snow_night.png" />
+    <Content Include="Resources\Weather\overcast_and_rain_day.png" />
+    <Content Include="Resources\Weather\overcast_and_rain_night.png" />
+    <Content Include="Resources\Weather\overcast_and_showers_day.png" />
+    <Content Include="Resources\Weather\overcast_and_showers_night.png" />
+    <Content Include="Resources\Weather\overcast_day.png" />
+    <Content Include="Resources\Weather\overcast_night.png" />
+    <Content Include="Resources\Weather\partly_cloudy_and_light_rain_day.png" />
+    <Content Include="Resources\Weather\partly_cloudy_and_light_rain_night.png" />
+    <Content Include="Resources\Weather\partly_cloudy_and_showers_day.png" />
+    <Content Include="Resources\Weather\partly_cloudy_and_showers_night.png" />
+    <Content Include="Resources\Weather\partly_cloudy_day.png" />
+    <Content Include="Resources\Weather\partly_cloudy_night.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

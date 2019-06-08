@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Properties;
 using OpenHardwareMonitor.Hardware;
 using System.Drawing;
 using System.Windows.Forms;
@@ -84,23 +85,23 @@ namespace Gadget.Widgets.Computer
 			switch (hardwareType)
 			{
 				case HardwareType.CPU:
-                    return Image.FromFile("Resources\\Icons\\cpu.png");
+                    return Resources.cpu;
 				case HardwareType.GpuNvidia:
-                    return Image.FromFile("Resources\\Icons\\nvidia.png");
+                    return Resources.nvidia;
 				case HardwareType.GpuAti:
-                    return Image.FromFile("Resources\\Icons\\ati.png");
+                    return Resources.ati;
 				case HardwareType.HDD:
-                    return Image.FromFile("Resources\\Icons\\hdd.png");
+                    return Resources.hdd;
 				case HardwareType.Heatmaster:
-                    return Image.FromFile("Resources\\Icons\\bigng.png");
+                    return Resources.bigng;
 				case HardwareType.Mainboard:
-                    return Image.FromFile("Resources\\Icons\\mainboard.png");
+                    return Resources.mainboard;
 				case HardwareType.SuperIO:
-                    return Image.FromFile("Resources\\Icons\\chip.png");
+                    return Resources.chip;
 				case HardwareType.TBalancer:
-                    return Image.FromFile("Resources\\Icons\\bigng.png");
+                    return Resources.bigng;
 				case HardwareType.RAM:
-                    return Image.FromFile("Resources\\Icons\\ram.png");
+                    return Resources.ram;
 				default:
                     return new Bitmap(1, 1);
 			}

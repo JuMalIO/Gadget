@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Gadget.Widgets.RSS
+namespace Gadget.Widgets.Rss
 {
-    public partial class RSSUserControl : UserControl
+    public partial class RssUserControl : UserControl
     {
         public Color Color
         {
@@ -44,7 +44,7 @@ namespace Gadget.Widgets.RSS
             }
         }
 
-        public RSSUserControl(Color color, int maxTitles, List<string> rssLinks)
+        public RssUserControl(Color color, int maxTitles, List<string> rssLinks)
         {
             InitializeComponent();
 

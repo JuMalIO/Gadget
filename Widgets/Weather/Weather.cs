@@ -1,11 +1,11 @@
 ﻿using Gadget.Config;
+using Gadget.Extensions;
+using Gadget.Properties;
+using Gadget.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Gadget.Widgets.Weather
@@ -55,58 +55,198 @@ namespace Gadget.Widgets.Weather
 
         #endregion
 
+
         private int _updateInternetCount;
         private Font _font;
 		private Brush _brush;
 		private WeatherData _weatherData;
+        private Image _weatherImage;
+        private bool _isDayTime;
+        
+        private const string Celcius = " °C";
 
-		public const string CELCIUS = " °C";
+        #region Weather image list
 
-		public void Initiate()
+        private static readonly Dictionary<string, Image[]> WeatherImages = new Dictionary<string, Image[]>
+        {
+            {
+                "Clear",
+                new []
+                {
+                    Resources.clear_day,
+                    Resources.clear_night
+                }
+            },
+            {
+                "Cloudy and light snow",
+                new []
+                {
+                    Resources.cloudy_and_light_snow_day,
+                    Resources.cloudy_and_light_snow_night
+                }
+            },
+            {
+                "Cloudy and showers",
+                new []
+                {
+                    Resources.cloudy_and_showers_day,
+                    Resources.cloudy_and_showers_night
+                }
+            },
+            {
+                "Cloudy",
+                new []
+                {
+                    Resources.cloudy_day,
+                    Resources.cloudy_night
+                }
+            },
+            {
+                "Cloudy, thunderstorms with rain",
+                new []
+                {
+                    Resources.cloudy_thunderstorms_with_rain_day,
+                    Resources.cloudy_thunderstorms_with_rain_night
+                }
+            },
+            {
+                "Mostly clear",
+                new []
+                {
+                    Resources.mostly_clear_day,
+                    Resources.mostly_clear_night
+                }
+            },
+            {
+                "Mostly cloudy",
+                new []
+                {
+                    Resources.mostly_cloudy_day,
+                    Resources.mostly_cloudy_night
+                }
+            },
+            {
+                "Overcast and light rain",
+                new []
+                {
+                    Resources.overcast_and_light_rain_day,
+                    Resources.overcast_and_light_rain_night
+                }
+            },
+            {
+                "Overcast and light snow",
+                new []
+                {
+                    Resources.overcast_and_light_snow_day,
+                    Resources.overcast_and_light_snow_night
+                }
+            },
+            {
+                "Overcast and light wet snow",
+                new []
+                {
+                    Resources.overcast_and_light_wet_snow_day,
+                    Resources.overcast_and_light_wet_snow_night
+                }
+            },
+            {
+                "Overcast and rain",
+                new []
+                {
+                    Resources.overcast_and_rain_day,
+                    Resources.overcast_and_rain_night
+                }
+            },
+            {
+                "Overcast and showers",
+                new []
+                {
+                    Resources.overcast_and_showers_day,
+                    Resources.overcast_and_showers_night
+                }
+            },
+            {
+                "Overcast",
+                new []
+                {
+                    Resources.overcast_day,
+                    Resources.overcast_night
+                }
+            },
+            {
+                "Partly cloudy and light rain",
+                new []
+                {
+                    Resources.partly_cloudy_and_light_rain_day,
+                    Resources.partly_cloudy_and_light_rain_night
+                }
+            },
+            {
+                "Partly cloudy and showers",
+                new []
+                {
+                    Resources.partly_cloudy_and_showers_day,
+                    Resources.partly_cloudy_and_showers_night
+                }
+            },
+            {
+                "Partly cloudy",
+                new []
+                {
+                    Resources.partly_cloudy_day,
+                    Resources.partly_cloudy_night
+                }
+            }
+        };
+
+        #endregion
+
+        public void Initiate()
 		{
-			_weatherData = new WeatherData();
-			_weatherData.TodayWeatherImage = new Bitmap(140, 90);
+            _weatherImage = new Bitmap(140, 90);
 			_font = new Font(FontName, FontSize, FontStyle.Regular);
 			_brush = new SolidBrush(Color);
         }
 
 		public void UpdateInternet()
 		{
-			UpdateImage();
-
 			_updateInternetCount++;
-			if (UpdateInternetInterval < _updateInternetCount || _weatherData.DayForcast.Count == 0)
+			if (UpdateInternetInterval < _updateInternetCount || _weatherData == null || _weatherData.TemperatureData.Count == 0)
 			{
 				_weatherData = GetWeather(Url);
+                _weatherImage = GetImage(_weatherData?.TemperatureData.FirstOrDefault()?.Weather, IsDayTime(_weatherData));
 				_updateInternetCount = 0;
 			}
-		}
+            
+            if (_isDayTime != IsDayTime(_weatherData))
+            {
+                _isDayTime = !_isDayTime;
+                _weatherImage = GetImage(_weatherData?.TemperatureData.FirstOrDefault()?.Weather, _isDayTime);
+            }
+        }
 
 		public void Draw(Graphics graphics, int width, int height)
 		{
-			if (_weatherData != null)
+			if (_weatherData != null && _weatherData.TemperatureData.Count > 0)
 			{
-				if (_weatherData.DayForcast.Count > 0)
-				{
-					graphics.DrawString(_weatherData.DayForcast[0].Item2, _font, _brush, 5, height);
-					string date = _weatherData.DayForcast[0].Item3 + " " + _weatherData.DayForcast[0].Item4 + CELCIUS;
-					int textWidth = (int)graphics.MeasureString(date, _font).Width;
-					graphics.DrawString(date, _font, _brush, width - textWidth - 5, height);
-					height = height + _font.Height;
-					int posX = (width - _weatherData.TodayWeatherImage.Width) / 2;
-					graphics.DrawImageUnscaledAndClipped(_weatherData.TodayWeatherImage, new Rectangle(posX, height, _weatherData.TodayWeatherImage.Width, _weatherData.TodayWeatherImage.Height));
-					height = height + _weatherData.TodayWeatherImage.Height;
-					graphics.DrawString($"Sun Rise/Set {_weatherData.SunRise}/{_weatherData.SunSet}", _font, _brush, 5, height);
-				}
-				else
-				{
-					graphics.DrawString("No weather update.", _font, _brush, 5, height);
-					height = height + _font.Height;
-					if (_weatherData.TodayWeatherImage != null)
-						height = height + _weatherData.TodayWeatherImage.Height;
-				}
-				height = height + _font.Height + 5;
+				graphics.DrawString(_weatherData.TemperatureData[0].Weather, _font, _brush, 5, height);
+				string date = _weatherData.TemperatureData[0].TemperatureLow + " " + _weatherData.TemperatureData[0].TemperatureHigh + Celcius;
+				int textWidth = (int)graphics.MeasureString(date, _font).Width;
+				graphics.DrawString(date, _font, _brush, width - textWidth - 5, height);
+				height = height + _font.Height;
+				int posX = (width - _weatherImage.Width) / 2;
+				graphics.DrawImageUnscaledAndClipped(_weatherImage, new Rectangle(posX, height, _weatherImage.Width, _weatherImage.Height));
+				height = height + _weatherImage.Height;
+				graphics.DrawString($"Sun Rise/Set {_weatherData.SunRise:HH:mm}/{_weatherData.SunSet:HH:mm}", _font, _brush, 5, height);
 			}
+			else
+			{
+				graphics.DrawString("No weather update.", _font, _brush, 5, height);
+				height = height + _font.Height;
+				if (_weatherImage != null)
+					height = height + _weatherImage.Height;
+			}
+			height = height + _font.Height + 5;
 		}
 
 		public void Update()
@@ -118,9 +258,9 @@ namespace Gadget.Widgets.Weather
 			Gadget.ProcessManager.Process(ClickType, ClickParameter);
 		}
 
-		public void Hover(Gadget.ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
 		{
-			if (_weatherData != null && _weatherData.DayForcast.Count > 1)
+			if (_weatherData != null && _weatherData.TemperatureData.Count > 1)
 			{
 				var title = new List<string>();
 				var text = new List<string>();
@@ -128,17 +268,18 @@ namespace Gadget.Widgets.Weather
 
                 for (var i = 1; i <= 3; i++)
                 {
-                    if (_weatherData.DayForcast.Count <= i)
+                    if (_weatherData.TemperatureData.Count <= i)
                     {
                         break;
                     }
 
-                    title.Add(_weatherData.DayForcast[i].Item1);
-                    image.Add(GetImage(_weatherData.DayForcast[i].Item2));
-                    text.Add(_weatherData.DayForcast[i].Item3 + " " + _weatherData.DayForcast[i].Item4 + CELCIUS);
+                    title.Add(_weatherData.TemperatureData[i].Day);
+                    image.Add(GetImage(_weatherData.TemperatureData[i].Weather));
+                    text.Add(_weatherData.TemperatureData[i].TemperatureLow + " " + _weatherData.TemperatureData[i].TemperatureHigh + Celcius);
                 }
 
-				toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
+                var toolTipWindow = new Gadget.ToolTip();
+                toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 				{
 					toolTipWindow.Hide();
 					Gadget.ProcessManager.Process(ClickType, ClickParameter);
@@ -149,10 +290,7 @@ namespace Gadget.Widgets.Weather
 
 		public int GetHeight()
 		{
-			if (_weatherData != null)
-				return _weatherData.TodayWeatherImage.Height + _font.Height * 2 + 5;
-			else
-				return _font.Height * 2 + 5;
+            return _weatherImage.Height + _font.Height * 2 + 5;
 		}
 
 		public bool ShowProperties()
@@ -171,220 +309,98 @@ namespace Gadget.Widgets.Weather
 			return false;
 		}
 
-		private void UpdateImage()
-		{
-			var dateTime = DateTime.Now;
-			bool isDayNow = false;
-			if (dateTime.TimeOfDay > _weatherData.SunRiseDateTime.TimeOfDay && dateTime.TimeOfDay < _weatherData.SunSetDateTime.TimeOfDay)
-				isDayNow = true;
-			if (_weatherData.IsDayNow != isDayNow)
-			{
-				if (_weatherData.DayForcast.Count > 0)
-				{
-					_weatherData.TodayWeatherImage = GetImage(_weatherData.DayForcast[0].Item2, _weatherData.SunRiseDateTime, _weatherData.SunSetDateTime);
-					_weatherData.IsDayNow = isDayNow;
-				}
-				else
-					_weatherData.TodayWeatherImage = GetImage(null, _weatherData.SunRiseDateTime, _weatherData.SunSetDateTime);
-			}
-		}
-
-        private static Image GetImage(string name, DateTime sunRise, DateTime sunSet)
+        private static Image GetImage(string name, bool isDayTime = true)
         {
-            var now = DateTime.Now;
-            var dayOrNight = now.TimeOfDay > sunRise.TimeOfDay && now.TimeOfDay < sunSet.TimeOfDay
-                ? ""
-                : "2";
-
-            return GetImage(name + dayOrNight);
-        }
-
-        private static Image GetImage(string name)
-		{
-            var file = $"Resources\\Weather\\{name.ToLower()}.png";
-
-            if (File.Exists(file))
+            if (WeatherImages.ContainsKey(name))
             {
-                return Image.FromFile(file);
+                return WeatherImages[name][isDayTime ? 0 : 1];
             }
-
             return new Bitmap(140, 90);
 		}
 
+        private static bool IsDayTime(WeatherData weatherData)
+        {
+            var now = DateTime.Now;
+            return now.TimeOfDay > weatherData?.SunRise.TimeOfDay && now.TimeOfDay < weatherData?.SunSet.TimeOfDay;
+        }
+
 		private static WeatherData GetWeather(string url)
 		{
-			var weatherData = new WeatherData();
-
 			try
 			{
-				var myRequest = (HttpWebRequest)WebRequest.Create(url);
-				var myResponse = myRequest.GetResponse();
-				var sr = new StreamReader(myResponse.GetResponseStream(), Encoding.GetEncoding(1252));
-				string html = sr.ReadToEnd();
-				sr.Close();
-				myResponse.Close();
+                var html = Request.GetHtml(url);
 
-				string text = "Current conditions";
-				int index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
+				html = html.CutAfterText("Current conditions");
 
-				text = "Feels Like: <strong>";
-				index = html.IndexOf(text);
+				html = html.CutAfterText("Feels Like: <strong>");
+				var feelsLike = html.CutBeforeText("<").Replace("&deg;", "");
 
-				string data = html.Substring(0, index);
-				string[] strArray = GetTextArray(data);
-				if (strArray.Length == 3)
-				{
-					weatherData.Temperature = GetTemperature(strArray[0] + strArray[1]);
-					weatherData.Weather = strArray[2];
-				}
-				else if (strArray.Length == 4)
-				{
-					weatherData.Temperature = GetTemperature(strArray[0] + strArray[1]);
-					weatherData.Wind = strArray[2];
-					weatherData.Weather = strArray[3];
-				}
+                html = html.CutAfterText("Barometer:  <strong>");
+				var barometer = html.CutBeforeText("<").Trim();
 
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.TemperatureFeelsLike = GetTemperature(html.Substring(0, index));
+                html = html.CutAfterText("Dewpoint:   <strong>");
+				var dewpoint = html.CutBeforeText("<").Replace("&deg;", "");
 
-				text = "Barometer:  <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.Barometer = html.Substring(0, index).Trim();
+                html = html.CutAfterText("Humidity:   <strong>");
+				var humidity = html.CutBeforeText("<").Trim();
 
-				text = "Dewpoint:   <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.TemperatureDewpoint = GetTemperature(html.Substring(0, index));
+                html = html.CutAfterText("Visibility: <strong>");
+				var visibility = html.CutBeforeText("<").Trim();
 
-				text = "Humidity:   <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.Humidity = html.Substring(0, index).Trim();
+                html = html.CutAfterText("Sun rise: <strong>");
+				var sunRise = html.CutBeforeText("<").Trim().ParseTime();
 
-				text = "Visibility: <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.Visibility = html.Substring(0, index).Trim();
+				html = html.CutAfterText("Sun set:  <strong>");
+				var sunSet = html.CutBeforeText("<").Trim().ParseTime();
 
-				text = "Sun rise: <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.SunRise = html.Substring(0, index).Trim();
-                DateTime currentSunRiseDateTime;
-                DateTime.TryParseExact(weatherData.SunRise, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunRiseDateTime);
-                weatherData.SunRiseDateTime = currentSunRiseDateTime;
+                html = html.CutAfterText("3 day outlook");
 
-                text = "Sun set:  <strong>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				index = html.IndexOf("<");
-				weatherData.SunSet = html.Substring(0, index).Trim();
-                DateTime currentSunSetDateTime;
-                DateTime.TryParseExact(weatherData.SunSet, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentSunSetDateTime);
-                weatherData.SunSetDateTime = currentSunSetDateTime;
+                var temperatureData = new List<TemperatureData>();
+                for (var i = 0; i < 3; i++)
+                {
+                    html = html.CutAfterText("title=\"");
+                    var weather = html.CutBeforeText("\"").Trim();
 
-                myRequest = (HttpWebRequest)WebRequest.Create(url + "?tenday");
-				myResponse = myRequest.GetResponse();
-				sr = new StreamReader(myResponse.GetResponseStream(), Encoding.GetEncoding(1252));
-				html = sr.ReadToEnd();
-				sr.Close();
-				myResponse.Close();
+                    html = html.CutAfterText("<strong>");
+                    var day = html.CutBeforeText("<").Trim();
 
-				text = "<h4>10 day forecast</h4>";
-				index = html.IndexOf(text);
-				html = html.Substring(index + text.Length, html.Length - index - text.Length);
-				
-				for (int i = 0; i < 10; i++)
-				{
-					text = "<span class=\"h5\">";
-					index = html.IndexOf(text);
-					html = html.Substring(index + text.Length, html.Length - index - text.Length);
-					index = html.IndexOf("<");
-					string day = html.Substring(0, index).Trim();
+                    html = html.CutAfterText("Hi: <strong>");
+                    var temperatureHigh = html.CutBeforeText("<").Replace("&deg;", "");
 
-					text = "title=\"";
-					index = html.IndexOf(text);
-					html = html.Substring(index + text.Length, html.Length - index - text.Length);
-					index = html.IndexOf("\"");
-					string weather = html.Substring(0, index).Trim();
+                    html = html.CutAfterText("Lo: <strong>");
+                    var temperatureLow = html.CutBeforeText("<").Replace("&deg;", "");
 
-					text = "Hi: <strong>";
-					index = html.IndexOf(text);
-					html = html.Substring(index + text.Length, html.Length - index - text.Length);
-					index = html.IndexOf("<");
-					string high = GetTemperature(html.Substring(0, index));
+                    temperatureData.Add(new TemperatureData
+                    {
+                        Day = day,
+                        Weather = weather,
+                        TemperatureHigh = temperatureHigh,
+                        TemperatureLow = temperatureLow
+                    });
+                }
 
-					text = "Lo: <strong>";
-					index = html.IndexOf(text);
-					html = html.Substring(index + text.Length, html.Length - index - text.Length);
-					index = html.IndexOf("<");
-					string low = GetTemperature(html.Substring(0, index));
+                html = html.CutAfterText("Detailed 5 day forecast");
 
-					weatherData.DayForcast.Add(new Tuple<string, string, string, string>(day, weather, low, high));
-				}
+                html = html.CutAfterText("<img src=\"");
+                var forecastLink = url.CutAfterText("//").CutBeforeText("/") + html.CutBeforeText("\"");
 
-				weatherData.IsDayNow = true;
-				if (weatherData.DayForcast.Count > 0 && File.Exists("Resources\\Weather\\" + weatherData.DayForcast[0].Item2 + ".png"))
-					weatherData.TodayWeatherImage = Image.FromFile("Resources\\Weather\\" + weatherData.DayForcast[0].Item2 + ".png");
-				else
-					weatherData.TodayWeatherImage = new Bitmap(140, 90);
+                return new WeatherData
+                {
+                    FeelsLike = feelsLike,
+                    Barometer = barometer,
+                    Dewpoint = dewpoint,
+                    Humidity = humidity,
+                    Visibility = visibility,
+                    SunRise = sunRise,
+                    SunSet = sunSet,
+                    TemperatureData = temperatureData,
+                    ForecastLink = forecastLink
+                };
 			}
 			catch
-			{
-			}
-
-			return weatherData;
-		}
-
-		private static string[] GetTextArray(string data)
-		{
-			var result = new List<string>();
-			int index;
-			while ((index = data.IndexOf(">")) >= 0)
-			{
-				data = data.Substring(index + 1, data.Length - index - 1);
-				index = data.IndexOf("<");
-				if (index >= 0)
-				{
-					string str = data.Substring(0, index).Trim();
-					if (str != "")
-						result.Add(str);
-					data = data.Substring(index + 1, data.Length - index - 1);
-				}
-			}
-			return result.ToArray();
-		}
-
-		private static string GetTemperature(string str)
-		{
-			int lastValid = -1;
-			int number = 0;
-
-			int.TryParse(str, out number);
-
-			for (int i = 0; i < str.Length; i++)
-			{
-				if (char.IsDigit(str[i]) || str[i] == '-' || str[i] == '+')
-					lastValid = i;
-				else
-					break;
-			}
-
-			if (lastValid >= 0)
-				int.TryParse(str.Substring(0, lastValid + 1), out number);
-
-			if (number > 0)
-				return "+" + number;
-			else
-				return number.ToString();
+            {
+                return null;
+            }
 		}
 	}
 }

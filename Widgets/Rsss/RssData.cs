@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Gadget.Widgets.RSS
+namespace Gadget.Widgets.Rss
 {
-    public sealed class RSSData
+    public sealed class RssData
     {
         public string Link { get; set; }
         public Image Picture { get; set; }

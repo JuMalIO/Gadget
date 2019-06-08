@@ -117,4 +117,188 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ati" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\ati.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bigng" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\bigng.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bottom_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\bottom_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bottom_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\bottom_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\chip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cpu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\cpu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="currency" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\currency.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\hdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mainboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\mainboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nvidia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\nvidia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\ram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icons\rss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="top_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\top_left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="top_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\border\top_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_04" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_05" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_06" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\06.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_07" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\07.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_08" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\08.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_09" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\09.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\time\10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\clear_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\clear_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_and_light_snow_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_and_light_snow_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_and_light_snow_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_and_light_snow_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_and_showers_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_and_showers_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_and_showers_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_and_showers_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_thunderstorms_with_rain_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_thunderstorms_with_rain_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloudy_thunderstorms_with_rain_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\cloudy_thunderstorms_with_rain_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mostly_clear_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\mostly_clear_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mostly_clear_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\mostly_clear_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mostly_cloudy_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\mostly_cloudy_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mostly_cloudy_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\mostly_cloudy_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_rain_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_rain_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_rain_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_rain_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_snow_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_snow_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_snow_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_snow_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_wet_snow_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_wet_snow_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_light_wet_snow_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_light_wet_snow_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_rain_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_rain_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_rain_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_rain_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_showers_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_showers_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_and_showers_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_and_showers_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overcast_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\overcast_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_and_light_rain_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_and_light_rain_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_and_light_rain_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_and_light_rain_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_and_showers_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_and_showers_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_and_showers_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_and_showers_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partly_cloudy_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weather\partly_cloudy_night.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

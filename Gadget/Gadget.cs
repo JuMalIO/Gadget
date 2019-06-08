@@ -33,7 +33,6 @@ namespace Gadget.Gadget
 		private IntPtr _handleBitmapDC;
         private Graphics _graphics;
         private Timer timer = new Timer();
-        private ToolTip toolTipWindow = new ToolTip();
 
 		public Gadget()
         {
@@ -125,7 +124,7 @@ namespace Gadget.Gadget
 					if (args.Y > startFromHeight && args.Y < startFromHeight + height)
 					{
 						if (widget is IWidgetWithHover && ((IWidgetWithHover)widget).IsHoverable)
-                            ((IWidgetWithHover)widget).Hover(toolTipWindow, Location, args.Location, startFromHeight);
+                            ((IWidgetWithHover)widget).Hover(Location, args.Location, startFromHeight);
 						break;
 					}
 					startFromHeight += height;

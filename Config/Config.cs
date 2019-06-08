@@ -4,7 +4,7 @@ using Gadget.Widgets.Computer;
 using Gadget.Widgets.Currency;
 using Gadget.Widgets.Date;
 using Gadget.Widgets.Graph;
-using Gadget.Widgets.RSS;
+using Gadget.Widgets.Rss;
 using Gadget.Widgets.Time;
 using Gadget.Widgets.Weather;
 using OpenHardwareMonitor.Hardware;
@@ -42,7 +42,7 @@ namespace Gadget.Config
         public Time Time { get; set; } = new Time();
         public Weather Weather { get; set; } = new Weather();
         public Currency Currency { get; set; } = new Currency();
-        public RSS RSS { get; set; } = new RSS();
+        public Rss Rss { get; set; } = new Rss();
 
         #endregion
 
@@ -146,8 +146,8 @@ namespace Gadget.Config
             Currency.Initiate();
             widgets.Add(Currency);
 
-            RSS.Initiate();
-            widgets.Add(RSS);
+            Rss.Initiate();
+            widgets.Add(Rss);
 
             widgets.SortByPosition();
 

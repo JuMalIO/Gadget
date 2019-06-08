@@ -1,6 +1,6 @@
-﻿namespace Gadget.Widgets.RSS
+﻿namespace Gadget.Widgets.Rss
 {
-    partial class RSSUserControl
+    partial class RssUserControl
     {
         /// <summary> 
         /// Required designer variable.

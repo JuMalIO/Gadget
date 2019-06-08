@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Properties;
 using Gadget.Widgets.Computer;
 using OpenHardwareMonitor.Hardware;
 using System;
@@ -41,14 +42,14 @@ namespace Gadget.Widgets.Graph
 		{
 			_graphSensorList = GetWidgets(hardwareType, ref widgets);
 
-			_borderTopLeft = Image.FromFile("Resources\\Border\\topLeft.png");
-			_borderTop = Image.FromFile("Resources\\Border\\top.png");
-			_borderTopRight = Image.FromFile("Resources\\Border\\topRight.png");
-			_borderRight = Image.FromFile("Resources\\Border\\right.png");
-			_borderBottomRight = Image.FromFile("Resources\\Border\\bottomRight.png");
-			_borderBottom = Image.FromFile("Resources\\Border\\bottom.png");
-			_borderBottomLeft = Image.FromFile("Resources\\Border\\bottomLeft.png");
-			_borderLeft = Image.FromFile("Resources\\Border\\left.png");
+			_borderTopLeft = Resources.top_left;
+			_borderTop = Resources.top;
+			_borderTopRight = Resources.top_right;
+			_borderRight = Resources.right;
+			_borderBottomRight = Resources.bottom_right;
+			_borderBottom = Resources.bottom;
+			_borderBottomLeft = Resources.bottom_left;
+			_borderLeft = Resources.left;
 
 			_graph = new Bitmap(width - 10 - _borderTopLeft.Width * 2, _borderLeft.Height - _borderTopLeft.Height - _borderBottomRight.Height);
 			using (Graphics g = Graphics.FromImage(_graph))

@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Properties;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -74,7 +75,7 @@ namespace Gadget.Widgets.Currency
 			_currencyDataList = new List<CurrencyData>();
 			_font = new Font(FontName, FontSize, FontStyle.Regular);
 			_brush = new SolidBrush(Color);
-			_image = Image.FromFile("Resources\\Icons\\currency.png");
+			_image = Resources.currency;
 		}
 
 		public void UpdateInternet()
@@ -134,7 +135,7 @@ namespace Gadget.Widgets.Currency
 			}
 		}
 
-		public void Hover(Gadget.ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
 		{
 			if (IsIconVisible)
 			{
@@ -150,7 +151,8 @@ namespace Gadget.Widgets.Currency
 						if (MouseLocation.Y < startFromHeight)
 						{
 							string text = "Bank Buys Cash: " + _currencyDataList[i].Money[CurrencyType.BankBuysCash] + " LT\nBank Buys Transfer: " + _currencyDataList[i].Money[CurrencyType.BankBuysTransfer] + " LT\nBank Sells Cash: " + _currencyDataList[i].Money[CurrencyType.BankSellsCash] + " LT\nBank Sells Transfer: " + _currencyDataList[i].Money[CurrencyType.BankSellsTransfer] + " LT\nBank Of Lithuania: " + _currencyDataList[i].Money[CurrencyType.BankOfLithuania] + " LT";
-							toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
+                            var toolTipWindow = new Gadget.ToolTip();
+                            toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 							{
 								toolTipWindow.Hide();
 								System.Diagnostics.Process.Start(_url);

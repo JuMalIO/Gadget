@@ -66,9 +66,10 @@ namespace Gadget.Widgets.Date
 			calendarForm.ShowDialog();
 		}
 
-		public void Hover(Gadget.ToolTip toolTipWindow, Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
 		{
-			toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
+            var toolTipWindow = new Gadget.ToolTip();
+            toolTipWindow.MouseClick += delegate(object obj, MouseEventArgs a)
 			{
 				toolTipWindow.Hide();
 				Click(default(Point), 0);
