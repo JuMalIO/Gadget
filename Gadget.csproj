@@ -152,11 +152,11 @@
     <Compile Include="Widgets\IWidgetWithClick.cs" />
     <Compile Include="Widgets\IWidget.cs" />
     <Compile Include="Widgets\IWidgetWithIcon.cs" />
-    <Compile Include="Widgets\Rsss\RssData.cs" />
-    <Compile Include="Widgets\Rsss\RssUserControl.cs">
+    <Compile Include="Widgets\Rss\RssData.cs" />
+    <Compile Include="Widgets\Rss\RssUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Widgets\Rsss\RssUserControl.Designer.cs">
+    <Compile Include="Widgets\Rss\RssUserControl.Designer.cs">
       <DependentUpon>RssUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Widgets\ClickType.cs" />
@@ -165,7 +165,7 @@
     <Compile Include="Widgets\Weather\WeatherData.cs" />
     <Compile Include="Widgets\IWidgetWithText.cs" />
     <Compile Include="Widgets\IWidgetWithInternet.cs" />
-    <Compile Include="Widgets\Rsss\Rss.cs" />
+    <Compile Include="Widgets\Rss\Rss.cs" />
     <Compile Include="Widgets\Time\ActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,7 +218,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Widgets\Rsss\RssUserControl.resx">
+    <EmbeddedResource Include="Widgets\Rss\RssUserControl.resx">
       <DependentUpon>RssUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Widgets\Time\ActionForm.resx">
