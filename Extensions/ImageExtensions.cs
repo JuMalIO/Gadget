@@ -6,25 +6,23 @@ namespace Gadget.Extensions
     {
         public static Image Resize(this Image image, int x, int y)
         {
-            if (image != null)
-            {
-                if (image.Width > x || image.Height > y)
-                {
-                    if (image.Width > image.Height)
-                    {
-                        y = (int)((double)x * (double)((double)image.Height / (double)image.Width));
-                    }
-                    else
-                    {
-                        x = (int)((double)y * (double)((double)image.Width / (double)image.Height));
-                    }
-                    return (Image)(new Bitmap(image, new Size(x, y)));
-                }
+            if (image == null)
+                return null;
 
-                return image;
+            if (image.Width > x || image.Height > y)
+            {
+                if (image.Width > image.Height)
+                {
+                    y = (int)((double)x * (double)((double)image.Height / (double)image.Width));
+                }
+                else
+                {
+                    x = (int)((double)y * (double)((double)image.Width / (double)image.Height));
+                }
+                return (Image)(new Bitmap(image, new Size(x, y)));
             }
 
-            return null;
+            return image;
         }
     }
 }

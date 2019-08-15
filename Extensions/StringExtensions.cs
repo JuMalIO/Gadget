@@ -5,6 +5,11 @@ namespace Gadget.Extensions
 {
     public static class StringExtensions
     {
+        public static string[] Split(this string str, string split)
+        {
+            return str.Split(new string[] { split }, StringSplitOptions.None);
+        }
+
         public static string CutAfterText(this string str, string text)
         {
             var index = str.IndexOf(text);
@@ -29,6 +34,13 @@ namespace Gadget.Extensions
         {
             DateTime.TryParseExact(str, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var time);
             return time;
+        }
+
+        public static DateTime ParseTimestamp(this string str)
+        {
+            long.TryParse(str, out var timespan);
+            var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timespan).ToLocalTime();
+            return date;
         }
     }
 }
