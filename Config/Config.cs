@@ -25,8 +25,8 @@ namespace Gadget.Config
         public Color BackgroundColor { get; set; } = Color.Black;
         public bool Blur { get; set; } = true;
         public bool[] BackgroundBorder { get; set; } = new bool[] { false, false, false, true };
-        public Point Location { get; set; } = new Point(Screen.PrimaryScreen.Bounds.Width - 225, 0);
-        public Size Size { get; set; } = new Size(225, Screen.PrimaryScreen.Bounds.Height - 40);
+        public Point Location { get; set; } = new Point(Screen.PrimaryScreen.WorkingArea.Width - (int)(Screen.PrimaryScreen.WorkingArea.Width * 0.12), 0);
+        public Size Size { get; set; } = new Size((int)(Screen.PrimaryScreen.WorkingArea.Width * 0.12), Screen.PrimaryScreen.WorkingArea.Height);
         public bool LockPositionAndSize { get; set; } = true;
         public bool AlwaysOnTop { get; set; } = false;
         public byte Opacity { get; set; } = 255;
