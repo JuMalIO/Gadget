@@ -62,5 +62,13 @@ namespace Gadget.Widgets.Rss
                 panel1.BackColor = colorDialog.Color;
             }
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                textBox1.SelectAll();
+            }
+        }
     }
 }

@@ -113,13 +113,14 @@
             this.textBox1.Size = new System.Drawing.Size(251, 118);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // RSSUserControl
+            // RssUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Name = "RSSUserControl";
+            this.Name = "RssUserControl";
             this.Size = new System.Drawing.Size(293, 206);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
