@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Gadget.Widgets.Rss
 {
@@ -8,7 +9,7 @@ namespace Gadget.Widgets.Rss
         public Image Picture { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public bool IsNew { get; set; }
     }
 }

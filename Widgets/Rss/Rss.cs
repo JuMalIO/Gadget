@@ -1,11 +1,11 @@
 ﻿using Gadget.Config;
+using Gadget.Extensions;
 using Gadget.Properties;
+using Gadget.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.ServiceModel.Syndication;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -89,7 +89,7 @@ namespace Gadget.Widgets.Rss
 			_updateInternetCount++;
 			if (UpdateInternetInterval < _updateInternetCount || _rssDataList.Count == 0)
 			{
-				GetRssFeed(RssLinks, MaxTitles, ref _rssDataList);
+                _rssDataList = GetRssFeed(RssLinks, MaxTitles);
 				_updateInternetCount = 0;
 			}
 		}
@@ -132,15 +132,16 @@ namespace Gadget.Widgets.Rss
 		{
 		}
 
-		public void Click(Point MouseLocation, int startFromHeight)
+		public void Click(Point mouseLocation, int startFromHeight)
 		{
 			if (IsIconVisible)
 			{
 				startFromHeight += _font.Height + 5;
 			}
-			if (MouseLocation.Y >= startFromHeight)
+
+			if (mouseLocation.Y >= startFromHeight)
 			{
-				int x = (MouseLocation.Y - startFromHeight) / _font.Height;
+				int x = (mouseLocation.Y - startFromHeight) / _font.Height;
 				if (_rssDataList.Count > x && x < MaxTitles && x >= 0)
 				{
 					_rssDataList[x].IsNew = false;
@@ -149,15 +150,16 @@ namespace Gadget.Widgets.Rss
 			}
 		}
 
-		public void Hover(Point ApplicationLocation, Point MouseLocation, int startFromHeight)
+		public void Hover(Point applicationLocation, Point mouseLocation, int startFromHeight)
 		{
 			if (IsIconVisible)
 			{
 				startFromHeight += _font.Height + 5;
 			}
-			if (MouseLocation.Y >= startFromHeight)
+
+			if (mouseLocation.Y >= startFromHeight)
 			{
-				int x = (MouseLocation.Y - startFromHeight) / _font.Height;
+				int x = (mouseLocation.Y - startFromHeight) / _font.Height;
 				if (_rssDataList.Count > x && x < MaxTitles && x >= 0)
 				{
 					_rssDataList[x].IsNew = false;
@@ -167,7 +169,7 @@ namespace Gadget.Widgets.Rss
 						toolTipWindow.Hide();
 						System.Diagnostics.Process.Start(_rssDataList[x].Link);
 					};
-					toolTipWindow.Show(new Point(ApplicationLocation.X + MouseLocation.X, ApplicationLocation.Y + MouseLocation.Y), _rssDataList[x].Title, _rssDataList[x].Summary + "\n" + _rssDataList[x].Date, new Font(FontName, FontSize + 2, FontStyle.Regular), _font, _brush, _rssDataList[x].Picture);
+					toolTipWindow.Show(new Point(applicationLocation.X + mouseLocation.X, applicationLocation.Y + mouseLocation.Y), _rssDataList[x].Title, _rssDataList[x].Summary + "\n" + _rssDataList[x].Date, new Font(FontName, FontSize + 2, FontStyle.Regular), _font, _brush, _rssDataList[x].Picture);
 				}
 			}
 		}
@@ -204,55 +206,103 @@ namespace Gadget.Widgets.Rss
 			return false;
 		}
 
-		public static void GetRssFeed(List<string> rssLinks, int max, ref List<RssData> rssDataList)
-		{
-			try
-			{
-				foreach (var url in rssLinks)
-				{
-					XmlReader reader = XmlReader.Create(url);
-					SyndicationFeed feed = SyndicationFeed.Load(reader);
-					reader.Close();
-					foreach (SyndicationItem syndicationItem in feed.Items)
-					{
-						if (!rssDataList.Any(x => x.Link == syndicationItem.Id))
-						{
-							RssData rssData = new RssData();
-							List<Uri> uriList = null;
-							if (syndicationItem.Content != null)
-							{
-								uriList = FetchLinksFromSource(((TextSyndicationContent)syndicationItem.Content).Text);
-							}
-							else
-							{
-								string content = "";
-								foreach (SyndicationElementExtension ext in syndicationItem.ElementExtensions)
-								{
-									if (ext.GetObject<XElement>().Name.LocalName == "encoded")
-										content += ext.GetObject<XElement>().Value;
-								}
-								uriList = FetchLinksFromSource(content);
-							}
+		public static List<RssData> GetRssFeed(List<string> urls, int max)
+        {
+            var rssDataList = new List<RssData>();
 
-							if (uriList != null && uriList.Count > 0)
-								rssData.Picture = ResizeImage(GetImage(uriList[0]), 255, 255);
-							rssData.Link = syndicationItem.Id;
-							rssData.Title = HttpUtility.HtmlDecode(syndicationItem.Title.Text);
-							rssData.Summary = new Regex("<.*?>", RegexOptions.Compiled).Replace(HttpUtility.HtmlDecode(syndicationItem.Summary.Text), string.Empty);
-							rssData.Date = syndicationItem.PublishDate.ToString("yyyy.MM.dd HH:mm");
-							rssData.IsNew = true;
-							rssDataList.Add(rssData);
-						}
-					}
-				}
-			}
-			catch
-			{
-			}
+            foreach (var url in urls)
+            {
+                try
+                {
+                    if (url.Contains("facebook.com"))
+                    {
+                        rssDataList.Add(GetFacebookFeed(url));
+                    }
+                    else
+                    {
+                        var reader = XmlReader.Create(url);
+                        var feed = SyndicationFeed.Load(reader);
+                        reader.Close();
+                        foreach (SyndicationItem syndicationItem in feed.Items)
+                        {
+                            List<Uri> uriList = null;
+                            if (syndicationItem.Content != null)
+                            {
+                                uriList = FetchLinksFromSource(((TextSyndicationContent)syndicationItem.Content).Text);
+                            }
+                            else
+                            {
+                                string content = "";
+                                foreach (SyndicationElementExtension ext in syndicationItem.ElementExtensions)
+                                {
+                                    if (ext.GetObject<XElement>().Name.LocalName == "encoded")
+                                        content += ext.GetObject<XElement>().Value;
+                                }
+                                uriList = FetchLinksFromSource(content);
+                            }
+
+                            rssDataList.Add(new RssData
+                            {
+                                Link = syndicationItem.Id,
+                                Title = HttpUtility.HtmlDecode(syndicationItem.Title.Text),
+                                Summary = new Regex("<.*?>", RegexOptions.Compiled).Replace(HttpUtility.HtmlDecode(syndicationItem.Summary.Text), string.Empty),
+                                Date = syndicationItem.PublishDate.UtcDateTime,
+                                IsNew = true,
+                                Picture = uriList != null && uriList.Count > 0
+                                    ? Web.GetImage(uriList[0].ToString()).Resize(255, 255)
+                                    : null
+                            });
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+
 			rssDataList.Sort((item1, item2) => item2.Date.CompareTo(item1.Date));
 			if (rssDataList.Count > max)
 				rssDataList.RemoveRange(max, rssDataList.Count - max);
+
+            return rssDataList;
 		}
+
+        private static RssData GetFacebookFeed(string url)
+        {
+            try
+            {
+                var html = Web.GetHtml(url);
+
+                html = html.CutAfterText("pagelet_timeline_main_column");
+
+                html = html.CutAfterText("data-utime=\"");
+                var date = html.CutBeforeText("\"").ParseTimestamp();
+                
+                html = html.CutAfterText("post_message");
+                html = html.CutAfterText(">");
+                var htmlText = html.CutBeforeText("</div>");
+                var htmlTextWithNewLines = string.Join("\n", htmlText.Split("<br />").Select(x => x.Trim()));
+                var htmlTextHiddenSpanRemoved = new Regex("text_exposed_hide.*?/span", RegexOptions.Compiled).Replace(htmlTextWithNewLines, string.Empty);
+                var htmlTextAllSpansRemoved = new Regex("<.*?>", RegexOptions.Compiled).Replace(htmlTextHiddenSpanRemoved, string.Empty);
+                var title = new Regex("<.*?>", RegexOptions.Compiled).Replace(htmlTextAllSpansRemoved, string.Empty);
+
+                html = html.CutAfterText("ft_ent_identifier");
+                html = html.CutAfterText("value=\"");
+                var link = (url.CutBeforeText("?") ?? url) + html.CutBeforeText("\"");
+                
+                return new RssData
+                {
+                    Date = date,
+                    Title = title,
+                    IsNew = true,
+                    Link = link
+                };
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
 		public static List<Uri> FetchLinksFromSource(string htmlSource)
 		{
@@ -265,40 +315,6 @@ namespace Gadget.Widgets.Rss
 				links.Add(new Uri(href));
 			}
 			return links;
-		}
-
-		public static Image GetImage(Uri uri)
-		{
-			try
-			{
-				HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
-				HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
-				Stream stream = httpWebReponse.GetResponseStream();
-				return Image.FromStream(stream);
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		public static Image ResizeImage(Image imgToResize, int x, int y)
-		{
-			if (imgToResize != null)
-			{
-				if (imgToResize.Width > x || imgToResize.Height > y)
-				{
-					if (imgToResize.Width > imgToResize.Height)
-						y = (int)((double)x * (double)((double)imgToResize.Height / (double)imgToResize.Width));
-					else
-						x = (int)((double)y * (double)((double)imgToResize.Width / (double)imgToResize.Height));
-					return (Image)(new Bitmap(imgToResize, new Size(x, y)));
-				}
-				else
-					return imgToResize;
-			}
-			else
-				return null;
 		}
 	}
 }
