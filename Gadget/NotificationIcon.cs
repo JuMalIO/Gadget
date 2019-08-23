@@ -1,67 +1,84 @@
 ﻿using Gadget.Config;
 using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Gadget.Gadget
 {
-    public class NotificationIcon
+    public class NotificationIcon : IDisposable
     {
-        NotifyIcon _notifyIcon = new NotifyIcon();
+        private readonly NotifyIcon _notifyIcon;
 
         public NotificationIcon(Gadget gadget)
         {
-            _notifyIcon.Text = "Gadget";
-            _notifyIcon.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            _notifyIcon.Visible = true;
-
-            var contextMenu = new ContextMenu();
-
-            var lockItem = new MenuItem("Lock position and size");
-            lockItem.Checked = gadget.LockPositionAndSize;
-            lockItem.Click += delegate (object sender, EventArgs e)
+            _notifyIcon = new NotifyIcon
             {
-                lockItem.Checked = !lockItem.Checked;
-                gadget.LockPositionAndSize = lockItem.Checked;
+                Text = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title,
+                Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath),
+                Visible = true,
+                ContextMenu = GetContextMenu(gadget)
+            };
+        }
+
+        private ContextMenu GetContextMenu(Gadget gadget)
+        {
+            var lockPositionAndSizeMenuItem = new MenuItem("Lock position and size");
+            lockPositionAndSizeMenuItem.Checked = gadget.LockPositionAndSize;
+            lockPositionAndSizeMenuItem.Click += delegate (object sender, EventArgs e)
+            {
+                lockPositionAndSizeMenuItem.Checked = !lockPositionAndSizeMenuItem.Checked;
+                gadget.LockPositionAndSize = lockPositionAndSizeMenuItem.Checked;
 
                 gadget.SaveConfig();
             };
-            contextMenu.MenuItems.Add(lockItem);
 
-            var alwaysOnTopItem = new MenuItem("Always on top");
-            alwaysOnTopItem.Checked = gadget.AlwaysOnTop;
-            alwaysOnTopItem.Click += delegate (object sender, EventArgs e)
+            var alwaysOnTopMenuItem = new MenuItem("Always on top");
+            alwaysOnTopMenuItem.Checked = gadget.AlwaysOnTop;
+            alwaysOnTopMenuItem.Click += delegate (object sender, EventArgs e)
             {
-                alwaysOnTopItem.Checked = !alwaysOnTopItem.Checked;
-                gadget.AlwaysOnTop = alwaysOnTopItem.Checked;
+                alwaysOnTopMenuItem.Checked = !alwaysOnTopMenuItem.Checked;
+                gadget.AlwaysOnTop = alwaysOnTopMenuItem.Checked;
 
                 gadget.SaveConfig();
             };
-            contextMenu.MenuItems.Add(alwaysOnTopItem);
 
-            var settingsMenu = new MenuItem("Settings");
-            settingsMenu.Click += delegate (object sender, EventArgs e)
+            var settingsMenuItem = new MenuItem("Settings");
+            settingsMenuItem.Click += delegate (object sender, EventArgs e)
             {
                 var settingsForm = new SettingsForm(gadget);
                 settingsForm.ShowDialog();
             };
-            contextMenu.MenuItems.Add(settingsMenu);
 
-            var aboutMenu = new MenuItem("About");
-            aboutMenu.Click += delegate (object sender, EventArgs e)
+            var aboutMenuItem = new MenuItem("About");
+            aboutMenuItem.Click += delegate (object sender, EventArgs e)
             {
                 MessageBox.Show("Gadget App by Hotter v0.5", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
-            contextMenu.MenuItems.Add(aboutMenu);
 
-            var exitMenu = new MenuItem("Exit");
-            exitMenu.Click += delegate (object sender, EventArgs e)
+            var exitMenuItem = new MenuItem("Exit");
+            exitMenuItem.Click += delegate (object sender, EventArgs e)
             {
                 Application.Exit();
             };
-            contextMenu.MenuItems.Add(exitMenu);
 
-            _notifyIcon.ContextMenu = contextMenu;
+            return new ContextMenu(new MenuItem[]
+            {
+                lockPositionAndSizeMenuItem,
+                alwaysOnTopMenuItem,
+                settingsMenuItem,
+                aboutMenuItem,
+                exitMenuItem
+            });
+        }
+
+        public void Dispose()
+        {
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.Visible = false;
+                _notifyIcon.Dispose();
+            }
         }
     }
 }
