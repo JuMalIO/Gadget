@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Gadget\ApplicationContext.cs" />
     <Compile Include="Gadget\NotificationIcon.cs" />
     <Compile Include="Gadget\ProcessManager.cs" />
     <Compile Include="Config\ClickUserControl.cs">

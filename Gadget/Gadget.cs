@@ -22,7 +22,6 @@ namespace Gadget.Gadget
         private Timer _gadgetTimer = new Timer();
         private Timer _internetTimer = new Timer();
 		private UpdateVisitor _updateVisitor = new UpdateVisitor();
-		private NotificationIcon _notificationIcon;
 		private BackgroundWorker _backgroundWorker = new BackgroundWorker();
 
 		private Bitmap _background;
@@ -66,8 +65,6 @@ namespace Gadget.Gadget
             _computer.RAMEnabled = true;
 
             _widgets = _config.GetWidgets(_computer);
-
-            _notificationIcon = new NotificationIcon(this);
 
             //?
             timer.Interval = 300;

@@ -13,9 +13,7 @@ namespace Gadget
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            var gadget = new Gadget.Gadget();
-            Application.Run();
+            Application.Run(new Gadget.ApplicationContext());
         }
     }
 }
