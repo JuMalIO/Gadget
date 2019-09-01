@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Extensions;
 using Gadget.Properties;
 using System;
 using System.Drawing;
@@ -85,9 +86,9 @@ namespace Gadget.Widgets.Time
 			}
 
 			var dateTime = DateTime.Now;
-			int timeNumberWidth = _time[0].Width;
-			int timeNumberHeight = _time[0].Height;
-			int timeDotsWidth = _time[10].Width;
+			int timeNumberWidth = _time[0].GetWidth();
+			int timeNumberHeight = _time[0].GetHeight();
+			int timeDotsWidth = _time[10].GetWidth();
 			int timeSpaceWidth = 2;
 			int posX = ((width - ((timeNumberWidth + timeSpaceWidth) * 4 + timeDotsWidth)) / 2);
 			graphics.DrawImageUnscaledAndClipped(_time[dateTime.Hour / 10], new Rectangle(posX, height, timeNumberWidth, timeNumberHeight));
@@ -145,7 +146,7 @@ namespace Gadget.Widgets.Time
 
 		public int GetHeight()
 		{
-			return _time[0].Height + 5;
+			return _time[0].GetHeight() + 5;
 		}
 
 		public bool ShowProperties()

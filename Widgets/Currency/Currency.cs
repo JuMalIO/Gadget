@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Extensions;
 using Gadget.Properties;
 using System.Collections.Generic;
 using System.Drawing;
@@ -92,7 +93,7 @@ namespace Gadget.Widgets.Currency
 		{
 			if (IsIconVisible)
 			{
-				var imageSize = _image.Width;
+				var imageSize = _image.GetWidth();
 				graphics.DrawImageUnscaledAndClipped(_image, new Rectangle(5, height + (int)((_font.Height - imageSize) / 2.0), imageSize, imageSize));
 				imageSize += 5;
 				graphics.DrawString(Name, _font, _brush, 5 + imageSize, height);

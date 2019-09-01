@@ -1,4 +1,5 @@
 ﻿using Gadget.Config;
+using Gadget.Extensions;
 using Gadget.Properties;
 using OpenHardwareMonitor.Hardware;
 using System.Drawing;
@@ -48,7 +49,7 @@ namespace Gadget.Widgets.Computer
 
 		public void Draw(Graphics graphics, int width, int height)
 		{
-			var iconSize = _icon.Width;
+			var iconSize = _icon.GetWidth();
 			graphics.DrawImageUnscaledAndClipped(_icon, new Rectangle(5, height + (int)((_font.Height - iconSize) / 2.0), iconSize, iconSize));
 			iconSize += 5;
 			graphics.DrawString(Name, _font, _brush, 5 + iconSize, height);

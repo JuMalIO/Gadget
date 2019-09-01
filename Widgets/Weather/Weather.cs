@@ -233,15 +233,15 @@ namespace Gadget.Widgets.Weather
 				int textWidth = (int)graphics.MeasureString(date, _font).Width;
 				graphics.DrawString(date, _font, _brush, width - textWidth - 5, height);
 				height += _font.Height;
-				int posX = (width - _weatherImage.Width) / 2;
-				graphics.DrawImageUnscaledAndClipped(_weatherImage, new Rectangle(posX, height, _weatherImage.Width, _weatherImage.Height));
-				height += _weatherImage.Height;
+				int posX = (width - _weatherImage.GetWidth()) / 2;
+				graphics.DrawImageUnscaledAndClipped(_weatherImage, new Rectangle(posX, height, _weatherImage.GetWidth(), _weatherImage.GetHeight()));
+				height += _weatherImage.GetHeight();
 				graphics.DrawString($"Sun Rise/Set {_weatherData.SunRise:HH:mm}/{_weatherData.SunSet:HH:mm}", _font, _brush, 5, height);
 			}
 			else
 			{
 				graphics.DrawString("No weather update.", _font, _brush, 5, height);
-				height += _font.Height + _weatherImage.Height;
+				height += _font.Height + _weatherImage.GetHeight();
 			}
 			height += _font.Height + 5;
 		}
@@ -271,7 +271,7 @@ namespace Gadget.Widgets.Weather
 
 		public int GetHeight()
 		{
-            return _weatherImage.Height + _font.Height * 2 + 5;
+            return _weatherImage.GetHeight() + _font.Height * 2 + 5;
 		}
 
 		public bool ShowProperties()
