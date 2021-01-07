@@ -112,6 +112,7 @@ namespace Gadget.Widgets.Time
 					IsAlarmEnabled = false;
 					ActionForm actionForm = new ActionForm(AlarmType);
 					actionForm.ShowDialog();
+					_alarmDateTime = GetAlarmDateTime(TimeType, Hour, Minute);
 					IsAlarmEnabled = AlarmRepeat;
 				}
 			}
